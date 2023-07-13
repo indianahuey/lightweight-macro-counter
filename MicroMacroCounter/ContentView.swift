@@ -8,14 +8,15 @@
 import SwiftUI
 
 enum Macro: String, CaseIterable {
-    case calories, protein, carbs, fat
+    case calories, protein, fat, water, carbs
 }
 
 var colors: [Macro : Color] = [
     .calories : .green,
     .protein : .red,
-    .carbs : .orange,
-    .fat : .yellow
+    .fat : .yellow,
+    .water : .blue,
+    .carbs : .orange
 ]
 
 var targets: [Macro : Int] = [:]
@@ -37,11 +38,13 @@ struct ContentView: View {
     @AppStorage("current protein") var current_protein: Int = 0
     @AppStorage("current carbs") var current_carbs: Int = 0
     @AppStorage("current fat") var current_fat: Int = 0
+    @AppStorage("current water") var current_water: Int = 0
     
     @AppStorage("target calories") var target_calories: Int = 2500
     @AppStorage("target protein") var target_protein: Int = 150
     @AppStorage("target carbs") var target_carbs: Int = 330
     @AppStorage("target fat") var target_fat: Int = 70
+    @AppStorage("target water") var target_water: Int = 8
     
     var body: some View {
         
@@ -50,11 +53,13 @@ struct ContentView: View {
             currents[.protein] = current_protein
             currents[.carbs] = current_carbs
             currents[.fat] = current_fat
+            currents[.water] = current_water
             
             targets[.calories] = target_calories
             targets[.protein] = target_protein
             targets[.carbs] = target_carbs
             targets[.fat] = target_fat
+            targets[.water] = target_water
         }()
         
         GeometryReader { metrics in
@@ -107,6 +112,7 @@ struct ContentView: View {
                                 current_protein = currents[.protein]!
                                 current_carbs = currents[.carbs]!
                                 current_fat = currents[.fat]!
+                                current_water = currents[.water]!
                                 incrementing_macro.toggle()
                                 incrementing_macro.toggle()
                             }
@@ -126,6 +132,7 @@ struct ContentView: View {
                                 current_protein = currents[.protein]!
                                 current_carbs = currents[.carbs]!
                                 current_fat = currents[.fat]!
+                                current_water = currents[.water]!
                                 macro_input = ""
                             }
                             .font(.system(size: 35))
@@ -142,6 +149,7 @@ struct ContentView: View {
                                 target_protein = targets[.protein]!
                                 target_carbs = targets[.carbs]!
                                 target_fat = targets[.fat]!
+                                target_water = targets[.water]!
                                 target_input = ""
                             }
                             .font(.system(size: 35))
